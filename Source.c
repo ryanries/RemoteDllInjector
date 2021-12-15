@@ -1,6 +1,8 @@
 // Joseph Ryan Ries, 2021
 // DARK MODE!
 // The show where we do sketchy stuff with the Windows API!
+// Youtube: https://www.youtube.com/playlist?list=PLlaINRtydtNUwkwdmCBNtkwgVRda8Ya_G
+// Github: https://github.com/ryanries/RemoteDllInjector
 
 #pragma warning(push, 0)
 #pragma warning(disable: 4668)
@@ -9,7 +11,7 @@
 
 #include <stdio.h>
 
-// Usage: > RemoteDllInjector.exe <ProcessID> <PathToDLL>
+// Usage: RemoteDllInjector.exe <ProcessID> <PathToDLL>
 
 
 BOOL FileExistsW(wchar_t* FileName)
