@@ -155,6 +155,7 @@ int wmain(int argc, wchar_t* argv[], wchar_t* envp[])
 		}		
 	}
 
+	// Notice the address of kernel32.dll will be the same both in our process and in the remote process.
 	Kernel32ModuleHandle = GetModuleHandleW(L"kernel32.dll");
 
 	if (Kernel32ModuleHandle == NULL)
@@ -166,6 +167,7 @@ int wmain(int argc, wchar_t* argv[], wchar_t* envp[])
 		goto Exit;
 	}
 
+	// Locate the address of the LoadLibrary function within the kernel32.dll module.
 	LoadLibraryAddress = (LPVOID)GetProcAddress(Kernel32ModuleHandle, "LoadLibraryW");
 
 	if (LoadLibraryAddress == NULL)
@@ -177,6 +179,8 @@ int wmain(int argc, wchar_t* argv[], wchar_t* envp[])
 		goto Exit;
 	}
 
+	// Allocate some memory in the remote process - just enough for us to write a copy of the 
+	// DLL path into the remote processes' memory.
 	RemoteMemoryForDllName = VirtualAllocEx(
 		RemoteProcessHandle,
 		NULL,
@@ -203,6 +207,12 @@ int wmain(int argc, wchar_t* argv[], wchar_t* envp[])
 
 		goto Exit;
 	}
+
+	// Start a new thread in the remote process, specifying a start location of LoadLibrary.
+	// This is equivalent to the remote process calling LoadLibrary(L"C:\temp\my.dll");
+	// When you load a DLL via LoadLibrary, you also automatically and immediately run whatever
+	// code is contained in that module's DllMain function. That means this is an easy way to 
+	// get a remote process to run whatever arbitrary code we want.
 
 	if (CreateRemoteThread(
 		RemoteProcessHandle,
