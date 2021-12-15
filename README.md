@@ -10,4 +10,4 @@ Youtube: https://www.youtube.com/playlist?list=PLlaINRtydtNUwkwdmCBNtkwgVRda8Ya_
 
 Github: https://github.com/ryanries/RemoteDllInjector
 
-Usage: RemoteDllInjector.exe <ProcessID> <PathToDLL>
+Usage: RemoteDllInjector.exe ProcessID PathToDLL
