@@ -4,9 +4,14 @@
 // Youtube: https://www.youtube.com/playlist?list=PLlaINRtydtNUwkwdmCBNtkwgVRda8Ya_G
 // Github: https://github.com/ryanries/RemoteDllInjector
 
+// Temporarily disable warnings originating from windows.h, over which we have no control.
 #pragma warning(push, 0)
+
 #pragma warning(disable: 4668)
+
 #include <Windows.h>
+
+// Restore warning level to /Wall
 #pragma warning(pop)
 
 #include <stdio.h>
@@ -71,7 +76,7 @@ int wmain(int argc, wchar_t* argv[], wchar_t* envp[])
 
 	if (RemoteProcessHandle)
 	{
-		
+		// TODO: This is dumb to have this empty block. Fix this. I was doing this live on video, forgive me.
 	}
 	else
 	{
